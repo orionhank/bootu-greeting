@@ -14,14 +14,14 @@ import java.util.List;
 public class GreetingServiceImpl implements GreetingService {
 
     @Autowired
-    UserServiceClient userServiceClient;
+    private UserServiceClient userServiceClient;
 
     @Override
     public Greeting sayGreeting(String userId, String greetingWords) {
         Greeting greeting = new Greeting();
         List<UserInfo> userInfoList = userServiceClient.getUserList();
-        for (UserInfo userinfo : userInfoList){
-            if(userinfo.getUserId().equals(userId)){
+        for (UserInfo userinfo : userInfoList) {
+            if (userinfo.getUserId().equals(userId)) {
                 BeanUtils.copyProperties(userinfo, greeting);
                 greeting.setGreetingWords(greetingWords);
             }

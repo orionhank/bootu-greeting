@@ -31,6 +31,8 @@
         <lombokVersion>1.18.2</lombokVersion>
         <bootu.user.version>1.0-SNAPSHOT</bootu.user.version>
         <bootu.greeting.version>1.0-SNAPSHOT</bootu.greeting.version>
+        <jacocoVersion>0.8.1</jacocoVersion>
+        <surefireVersion>2.22.0</surefireVersion>
     </properties>
 
 
@@ -76,4 +78,24 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <pluginManagement>
+            <!--
+            Run test with sonar
+            mvn clean package sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=0813d86b00d5a7c567becfa45c55ef4d5c903102 -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.jacoco.reportPaths=target/jacoco.exec
+            -->
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefireVersion}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacocoVersion}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
