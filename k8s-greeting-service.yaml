@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: greeting-service
+  name: bootu-greeting
+spec:
+  ports:
+  - port: 9920
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: greeting-service
+  type: ClusterIP
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: bootu-greeting-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: greeting-service
+    spec:
+      containers:
+      - name: bootu-greeting
+        image: orionhank/bootu-greeting:latest
+        ports:
+        - containerPort: 8080
+
